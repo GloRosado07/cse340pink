@@ -15,6 +15,7 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
+const accountRoute = require("./routes/accountRoute")
 
 /* ***********************
  * Middleware
@@ -54,6 +55,8 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes`
 app.use("/inv", inventoryRoute)
+// Account routes
+app.use("/account", accountRoute)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
@@ -67,10 +70,7 @@ app.use(async (req, res, next) => {
 const port = process.env.PORT
 const host = process.env.HOST
 
-/* ***********************
-* Express Error Handler
-* Place after all other middleware
-*************************/
+
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
@@ -85,6 +85,7 @@ app.use(async (err, req, res, next) => {
     nav
   })
 })
+
 
 /* ***********************
  * Log statement to confirm server operation
